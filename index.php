@@ -1,6 +1,9 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,25 +35,24 @@
                 </div>
                 <div class="header-middle-right">
                     <ul class="header-middle-right-list">
-                        <li class="header-middle-right-item dnone open">
-                            <div class="cart-icon-menu">
-                                <i class="fa-light fa-magnifying-glass"></i>
-                            </div>
-                        </li>
-                        <li class="header-middle-right-item close" >
-                            <div class="cart-icon-menu">
-                                <i class="fa-light fa-circle-xmark"></i>
-                            </div>
-                        </li>
                         <li class="header-middle-right-item dropdown open">
                             <i class="fa-light fa-user"></i>
                             <div class="auth-container">
-                                <span class="text-dndk">Đăng nhập / Đăng ký</span>
-                                <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                                <?php if (isset($_SESSION['username'])): ?>
+                                    <a href="account.php" class="text-tk"><?php echo htmlspecialchars($_SESSION['username']); ?> <i class="fa-sharp fa-solid fa-caret-down"></i></a>
+                                <?php else: ?>
+                                    <span class="text-dndk">Đăng nhập / Đăng ký</span>
+                                    <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                                <?php endif; ?>
                             </div>
                             <ul class="header-middle-right-menu">
-                                <li><a id="login" href="#"onclick="window.location.href='dnhap.html';"><i class="fa-light fa-right-to-bracket" ></i> Đăng nhập</a></li>
-                                <li><a id="signup" href="#"onclick="window.location.href='dky.html';"><i class="fa-light fa-user-plus"></i> Đăng ký</a></li>
+                                <?php if (isset($_SESSION['username'])): ?>
+                                    <li><a href="account.php"><i class="fa-light fa-user-pen"></i> Thay đổi thông tin</a></li>
+                                    <li><a href="dxuat.php"><i class="fa-light fa-right-from-bracket"></i> Thoát</a></li>
+                                <?php else: ?>
+                                    <li><a href="dnhap.php"><i class="fa-light fa-right-to-bracket"></i> Đăng nhập</a></li>
+                                    <li><a href="dky.php"><i class="fa-light fa-right-to-bracket"></i> Đăng ký</a></li>
+                                <?php endif; ?>
                             </ul>
                         </li>
                 
